@@ -59,7 +59,9 @@ export default class ServerlessSelectiveFunctions {
       this.info(`Found ${functions.length} functions`);
     }
 
-    const { stage } = this.serverless.service.provider;
+    const stage =
+      this.serverless.service.provider?.environment?.DEPLOYMENT_NAME ||
+      this.serverless.service.provider.stage;
     this.info(`Selecting functions for stage: "${stage}"`);
 
     const selectedFunctions: {
